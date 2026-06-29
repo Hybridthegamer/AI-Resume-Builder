@@ -229,7 +229,7 @@ const ResumeDetailPage = () => {
             <h2 className="text-lg font-semibold text-gray-900 mb-2">Job Description</h2>
             <p className="text-sm text-gray-500 mb-4">Paste the job posting to see how well your resume matches.</p>
             <textarea
-              className="input resize-none mb-4"
+              className="input-field resize-none mb-4"
               rows={10}
               value={jobDesc}
               onChange={(e) => setJobDesc(e.target.value)}

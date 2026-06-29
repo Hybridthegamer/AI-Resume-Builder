@@ -406,13 +406,14 @@ const exportToPDF = async (resume) => {
       format: 'A4',
       margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' },
       printBackground: true,
+      // Required for Linux/Docker environments (no display server)
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
     };
     const pdfBuffer = await htmlPdf.generatePdf(file, options);
     fs.writeFileSync(filePath, pdfBuffer);
   } catch (err) {
-    console.warn('html-pdf-node failed, writing HTML as PDF fallback:', err.message);
-    // Fallback: write HTML file (rename as .html for clarity but keep .pdf extension for routing)
-    fs.writeFileSync(filePath, html);
+    console.warn('html-pdf-node failed:', err.message);
+    throw new Error('PDF generation failed. Ensure Chromium/Puppeteer is available. Run: npm install in the backend directory.');
   }
 
   return { filePath, fileName };
