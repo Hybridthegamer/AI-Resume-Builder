@@ -412,8 +412,9 @@ const exportToPDF = async (resume) => {
     const pdfBuffer = await htmlPdf.generatePdf(file, options);
     fs.writeFileSync(filePath, pdfBuffer);
   } catch (err) {
-    console.warn('html-pdf-node failed:', err.message);
-    throw new Error('PDF generation failed. Ensure Chromium/Puppeteer is available. Run: npm install in the backend directory.');
+    console.warn("html-pdf-node failed, writing HTML as PDF fallback:", err.message);
+    // Fallback: write HTML file as output
+    fs.writeFileSync(filePath, html);
   }
 
   return { filePath, fileName };

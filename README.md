@@ -4,11 +4,28 @@ An intelligent, web-based resume builder that uses the **Claude AI API** (`claud
 
 Built as a Final Year Project implementing the architecture specified in Chapters 1–3: a decoupled **React.js** frontend, **Node.js/Express** backend, **PostgreSQL** database, and the official `@anthropic-ai/sdk`.
 
+
+---
+
+## Project Overview
+
+Job seekers lose opportunities not because they lack qualifications, but because their resumes fail to pass Applicant Tracking Systems (ATS) or fail to communicate value clearly. Over 98% of Fortune 500 companies use ATS software to filter resumes before a human ever reads them.
+
+This system addresses that gap by:
+
+- Guiding users through a structured data-collection form
+- Using the Claude AI API (claude-sonnet-4-6) to rewrite experience bullet points and generate a professional summary using prompt engineering techniques
+- Computing an ATS compatibility score using a weighted keyword-density algorithm
+- Matching resume content against a provided job description and surfacing missing keywords
+- Rendering the finalised resume into one of three professionally designed templates
+- Exporting the completed resume as a PDF or DOCX file
+
 ---
 
 ## Table of Contents
 
-1. [Features](#features)
+1. [Project Overview](#project-overview)
+2. [Features](#features)
 2. [Tool Stack & Justification](#tool-stack--justification)
 3. [System Requirements](#system-requirements)
 4. [Quick Setup (Step-by-Step)](#quick-setup-step-by-step)
@@ -65,6 +82,14 @@ Built as a Final Year Project implementing the architecture specified in Chapter
 | **Axios** | HTTP client with interceptors that attach the JWT Bearer token to every request. |
 | **Tailwind CSS** | Utility-first CSS for rapid, consistent, responsive UI — satisfying the Portability NFR (Section 3.3.2). |
 | **React Context API** | Lightweight global auth state (user object + token). No Redux overhead needed for this scope. |
+
+
+### DevOps / Infrastructure (Production Targets)
+
+| Tool | Justification |
+|---|---|
+| **Amazon S3** | Cloud object storage for exported PDF/DOCX files, made accessible via pre-signed URLs. Local filesystem used in development. |
+| **HTTPS / TLS** | All production traffic must be served over HTTPS per the Security non-functional requirement. |
 
 ---
 
